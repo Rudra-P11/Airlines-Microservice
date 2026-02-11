@@ -83,3 +83,10 @@ const get = async (req, res) => {
         })
     }
 }
+
+module.exports = {
+    create,
+    destroy,
+    update,
+    get
+};

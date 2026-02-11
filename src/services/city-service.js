@@ -17,7 +17,7 @@ class CityService {
 
     async deleteCity(cityID) {
         try {
-            const response = await this.CityRepository.deleteCity(cityID);
+            const response = await this.CityRepository.deleteCity({ city_id: cityID });
             return response;
         } catch (error) {
             console.log("Error deleting city, check city-service.js");
@@ -27,7 +27,7 @@ class CityService {
 
     async updateCity(cityID, data) {
         try {
-            const city = await this.CityRepository.updateCity(cityID, data);
+            const city = await this.CityRepository.updateCity({ city_id: cityID, name: data.name });
             return city;
         } catch (error) {
             console.log("Error updating city, check city-service.js");
@@ -46,4 +46,4 @@ class CityService {
     }
 }
 
-module.exports = CityService;
+module.exports = { CityService };
