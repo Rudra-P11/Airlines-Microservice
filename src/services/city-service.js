@@ -37,7 +37,7 @@ class CityService {
 
     async getCity(cityID) {
         try {
-            const city = await this.CityRepository.getCity(cityID);
+            const city = await this.CityRepository.getCity({city_id: cityID});
             return city;
         } catch (error) {
             console.log("Error getting city, check city-service.js");
