@@ -45,9 +45,9 @@ class CityService {
         }
     }
 
-    async getAll() {
+    async getAll(filter) {
         try {
-            const cities = await this.CityRepository.getAll();
+            const cities = await this.CityRepository.getAll({name: filter.name});
             return cities;
         } catch (error) {
             console.log("Error fetching all cities, check city-service.js");

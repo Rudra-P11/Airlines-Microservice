@@ -1,12 +1,12 @@
 const { City } = require('../models')
-
+const { Op } = require('sequelize');
 class CityRepository {
     async createCity({name}) {
         try {
             const city = await City.create({name});
             return city;
         } catch (error) {
-            console.log("Error creating city, check city-repositoty.js");  
+            console.log("Error creating city, something went wrong in the repository layer");  
             throw error;
         }
     }
@@ -20,7 +20,7 @@ class CityRepository {
             });
             return true;
         } catch ( error ) {
-            console.log("Error deleting city, check city-repositoty.js");
+            console.log("Error deleting city, something went wrong in the repository layer");
             throw error;
         }
     }
@@ -32,7 +32,7 @@ class CityRepository {
             await city.save();
             return city;
         } catch ( error ) {
-            console.log("Error updating city, check city-repositoty.js");
+            console.log("Error updating city, something went wrong in the repository layer");
             throw error;
         }
     }
@@ -42,17 +42,27 @@ class CityRepository {
             const city = await City.findByPk(city_id);
             return city;
         } catch ( error ) {
-            console.log("Error fetching city, check city-repositoty.js");
+            console.log("Error fetching city, something went wrong in the repository layer");
             throw error;
         }  
     }     
 
-    async getAll() {
+    async getAll(filter) {
         try {
+            if(filter.name) {
+                const cities = await City.findAll({
+                    where: {
+                        name: {
+                            [Op.startsWith]: filter.name
+                        }
+                    }
+                })
+                return cities;
+            }
             const cities = await City.findAll();
             return cities;
         } catch ( error ) {
-            console.log("Error fetching all cities, check city-repositoty.js");
+            console.log("Error fetching all cities, something went wrong in the repository layer");
             throw error;
         }
     }
