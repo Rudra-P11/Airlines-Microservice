@@ -1,9 +1,9 @@
 const CrudRepository = require('./crud-repository');
-const {AirportModel} = require('../models/index');
+const {Airport} = require('../models');
 
 class AirportRepository extends CrudRepository{
     constructor(){
-        super(AirportModel);
+        super(Airport);
     }
 };
 
