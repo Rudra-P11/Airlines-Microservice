@@ -1,11 +1,12 @@
 const { CityService } = require('../services/city-service');
+const { SuccessCodes } = require('../utils/error-codes');
 
 const cityService = new CityService();
 
 const create = async (req, res) => {
     try {
         const city = await cityService.createCity(req.body)
-        res.status(201).json(
+        res.status(SuccessCodes.CREATED).json(
             {
                 data: city,
                 success: true,
